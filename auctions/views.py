@@ -1,14 +1,20 @@
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 
 from .models import User
-
+from .forms import NewListingForm
 
 def index(request):
     return render(request, "auctions/index.html")
+
+
+@login_required
+def create_listing(request):
+    return render(request, "auctions/create_listing.html")
 
 
 def login_view(request):
