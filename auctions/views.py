@@ -14,7 +14,9 @@ def index(request):
 
 @login_required
 def create_listing(request):
-    return render(request, "auctions/create_listing.html")
+    return render(request, "auctions/create_listing.html", {
+        "form": NewListingForm()
+    })
 
 
 def login_view(request):
