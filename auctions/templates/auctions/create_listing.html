@@ -1,5 +1,19 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    {{ form }}
+    <form action="{% url 'create_listing' %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="{{ form.title.id_for_label }}">Title</label>
+            <input type="text" class="form-control" id="{{ form.title.id_for_label }}" placeholder="Title">
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.description.id_for_label }}">Description</label>
+            <textarea name="{{ form.description.name }}" id="{{ form.description.id_for_label }}" cols="30" rows="10" class="form-control"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.image.id_for_label }}">Image</label>
+            <input type="file" id="{{ form.image.id_for_label }}" name="{{ form.image.name }}" accept="image/">
+        </div>
+    </form>
 {% endblock %}
