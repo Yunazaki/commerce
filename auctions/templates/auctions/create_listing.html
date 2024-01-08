@@ -1,11 +1,21 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <form action="{% url 'create_listing' %}" method="post">
+    {% if form.errors %}
+    <div class="alert alert-danger">
+    <strong>Error:</strong> There were some errors in your submission. Please correct them.
+    <ul>
+        {% for error in form.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+    </ul>
+    </div>
+    {% endif %}
+    <form action="{% url 'create_listing' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="mb-3">
             <label for="{{ form.title.id_for_label }}">Title</label>
-            <input type="text" class="form-control" id="{{ form.title.id_for_label }}" placeholder="Title">
+            <input type="text" class="form-control" name="{{ form.title.name}}" id="{{ form.title.id_for_label }}" placeholder="Title">
         </div>
         <div class="mb-3">
             <label for="{{ form.description.id_for_label }}">Description</label>
@@ -13,7 +23,7 @@
         </div>
         <div class="mb-3">
             <label for="{{ form.image.id_for_label }}">Image</label>
-            <input type="file" id="{{ form.image.id_for_label }}" name="{{ form.image.name }}" accept="image/">
+            <input type="file" id="{{ form.image.id_for_label }}" name="{{ form.image.name }}">
         </div>
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>

@@ -14,8 +14,18 @@ def index(request):
 
 @login_required
 def create_listing(request):
-    if request.method == "post":
-        pass
+    if request.method == "POST":
+        form = NewListingForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            form.save()
+
+            return redirect("index")
+        else:
+            return render(request, "auctions/create_listing.html", {
+                "form": form
+            })
+
     return render(request, "auctions/create_listing.html", {
         "form": NewListingForm()
     })

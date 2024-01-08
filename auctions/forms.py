@@ -1,7 +1,7 @@
 from django import forms
+from .models import Auctions
 
-class NewListingForm(forms.Form):
-    title = forms.CharField(max_length=64)
-    description = forms.CharField()
-    image = forms.ImageField()
-    date_listed = forms.DateTimeField()
+class NewListingForm(forms.ModelForm):
+    class Meta:
+        model = Auctions
+        exclude = ["date_listed"]
