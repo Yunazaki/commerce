@@ -25,6 +25,10 @@
             <label for="{{ form.image.id_for_label }}">Image</label>
             <input type="file" id="{{ form.image.id_for_label }}" name="{{ form.image.name }}">
         </div>
+        <div class="mb-3">
+            <label for="{{ form.starting_bid.id_for_label }}">Starting Bid</label>
+            <input type="number" name="{{ form.starting_bid.name }}" id="{{ form.starting_bid.id_for_label }}">
+        </div>
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 {% endblock %}
