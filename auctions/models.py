@@ -7,7 +7,7 @@ class User(AbstractUser):
     pass
 
 class Auctions(models.Model):
-    title = models.CharField(max_length=64, default="")
+    title = models.CharField(max_length=64)
     description = models.CharField(max_length=255, blank=True)
     image = models.ImageField(null=True)
     date_listed = models.DateTimeField(default=timezone.now)
