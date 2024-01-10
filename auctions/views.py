@@ -34,6 +34,10 @@ def create_listing(request):
         "form": NewListingForm()
     })
 
+@login_required
+def listing_page(request, item_id):
+    return render(request, "auctions/listing_page.html")
+
 
 def login_view(request):
     if request.method == "POST":
