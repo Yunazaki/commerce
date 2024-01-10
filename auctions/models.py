@@ -9,8 +9,8 @@ class User(AbstractUser):
 class Auctions(models.Model):
     title = models.CharField(max_length=64)
     description = models.CharField(max_length=255, blank=True)
-    image = models.ImageField(null=True)
-    starting_bid = models.FloatField(default=0)
+    image = models.ImageField(null=True, upload_to='media/')
+    bid = models.FloatField(default=0)
     date_listed = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
