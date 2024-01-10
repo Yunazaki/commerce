@@ -1,8 +1,8 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
 from .models import User, Auctions
@@ -36,7 +36,11 @@ def create_listing(request):
 
 @login_required
 def listing_page(request, item_id):
-    return render(request, "auctions/listing_page.html")
+    item = get_object_or_404(Auctions, pk=item_id)
+    
+    return render(request, "auctions/listing_page.html", {
+        "item": item
+    })
 
 
 def login_view(request):
