@@ -7,6 +7,7 @@ class User(AbstractUser):
     pass
 
 class Auctions(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=64)
     description = models.CharField(max_length=255, blank=True)
     image = models.ImageField(null=True, upload_to='media/')

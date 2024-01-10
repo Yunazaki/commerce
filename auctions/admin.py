@@ -4,6 +4,9 @@ from .models import User, Auctions
 class AuctionsAdmin(admin.ModelAdmin):
     list_display = ('id', 'title', 'bid')
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('id', 'username')
+
 # Register your models here.
-admin.site.register(User)
+admin.site.register(User, UserAdmin)
 admin.site.register(Auctions, AuctionsAdmin)

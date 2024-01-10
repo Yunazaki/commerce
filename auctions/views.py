@@ -22,7 +22,9 @@ def create_listing(request):
         form = NewListingForm(request.POST, request.FILES)
 
         if form.is_valid():
-            form.save()
+            instance = form.save(commit=False)
+            instance.user = request.user
+            instance.save()
 
             return redirect("index")
         else:
@@ -34,7 +36,7 @@ def create_listing(request):
         "form": NewListingForm()
     })
 
-@login_required
+
 def listing_page(request, item_id):
     item = get_object_or_404(Auctions, pk=item_id)
     

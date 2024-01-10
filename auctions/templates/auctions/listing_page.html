@@ -1,7 +1,20 @@
 {% extends 'auctions/layout.html' %}
 
 {% block body %}
-    <div>
-        <img src="{{ item.image.url }}" alt="">
+    <div class="flex">
+        <div class="w-100 text-center" style="max-height: 500px;">
+            <img src="{{ item.image.url }}" alt="" style="max-width: 100%; height: auto; min-width: 200px;">
+        </div>
+        <div class="w-100">
+            <h1> {{ item.title }} </h1>
+            <p class="description"> {{ item.description }} </p>
+            <p><strong>Current Bid Price:</strong> ${{ item.bid }} </p>
+            <p class="date"> Created: {{ item.date_listed }} </p>
+        </div>
+        {% if user.is_authenticated %}
+            <div class="w-100">
+                <button class="btn btn-primary">Bid</button>
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
