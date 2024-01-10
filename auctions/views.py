@@ -5,11 +5,15 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.urls import reverse
 
-from .models import User
+from .models import User, Auctions
 from .forms import NewListingForm
 
 def index(request):
-    return render(request, "auctions/index.html")
+    auctions = Auctions.objects.all()
+    
+    return render(request, "auctions/index.html", {
+        "auctions": auctions
+    })
 
 
 @login_required
