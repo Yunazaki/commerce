@@ -5,10 +5,10 @@
     
     {% for item in auctions %}
         <div class="mb-3 listing-container">
-            <div class="container-img">
+            <div class="listing-container-img">
                 <img src="{{ item.image.url }}" alt="Image">
             </div>
-            <div class="container-details">
+            <div class="listing-container-details">
                 <h3> {{ item.title }} </h3>
                 <p> <strong>Price:</strong> ${{ item.bid }} </p>
                 <p class="description"> {{ item.description }} </p>

@@ -11,18 +11,18 @@ body {
     padding: 5px;
 }
 
-.container-img {
+.listing-container-img {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.container-img img {
+.listing-container-img img {
     max-width: 100%;
     max-height: 100%;
 }
 
-.container-details {
+.listing-container-details {
     display: flex;
     flex-direction: column;
     justify-content: center;
