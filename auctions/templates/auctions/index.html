@@ -12,7 +12,7 @@
                 <h3> {{ item.title }} </h3>
                 <p> <strong>Price:</strong> ${{ item.bid }} </p>
                 <p class="description"> {{ item.description }} </p>
-                <p class="date"> Created: {{ item.date_listed }} </p>
+                <p class="date"> Created: {{ item.date_listed }} by {{ item.user }} </p>
             </div>
         </div>
     {% endfor %}
