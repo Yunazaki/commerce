@@ -31,6 +31,3 @@ class Comments(models.Model):
     auction = models.ForeignKey(Auctions, on_delete=models.CASCADE, related_name="comments", default=0)
     comment = models.CharField(max_length=255, default="")
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=0)
-
-    def __str__(self):
-        return self.user
