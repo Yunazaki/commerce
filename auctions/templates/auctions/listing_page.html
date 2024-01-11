@@ -14,6 +14,7 @@
         {% if user.is_authenticated %}
             <div class="w-100">
                 <button class="btn btn-primary">Bid</button>
+                <button class="btn btn-primary">Add to Watchlist</button>
                 {% if user == item.user %}
                     <button class="btn btn-primary">Close Auction</button>
                 {% endif %}
