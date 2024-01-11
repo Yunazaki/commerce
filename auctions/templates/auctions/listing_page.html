@@ -31,5 +31,13 @@
                 {% endif %}
             </div>
         {% endif %}
+        <h3>Bid List</h3>
+        <div class="bid-list">
+            <ul style="list-style-type: none; padding: 0;">
+                {% for bid in bids %}
+                    <li> {{ bid.bidder }}: ${{ bid.amount }} </li>
+                {% endfor %}
+            </ul>
+        </div>
     </div>
 {% endblock %}

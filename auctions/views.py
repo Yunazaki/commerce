@@ -40,9 +40,11 @@ def create_listing(request):
 
 def listing_page(request, item_id):
     item = get_object_or_404(Auctions, pk=item_id)
+    bids = Bids.objects.filter(auction=item_id)
     
     return render(request, "auctions/listing_page.html", {
-        "item": item
+        "item": item,
+        "bids": bids
     })
 
 
@@ -65,7 +67,7 @@ def place_bid(request, item_id):
             
         print("error")
         messages.error(request, "Invalid bid amount")
-    
+
     return redirect(reverse('listing_page', kwargs={'item_id': item_id}))
 
 
