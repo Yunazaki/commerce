@@ -54,15 +54,19 @@ def place_bid(request, item_id):
         amount = request.POST["bid_amount"]
 
         if float(amount) > item.bid:
-
+            print("success")
             new_bid = Bids.objects.create(auction=item, bidder=request.user, amount=amount)
             
             item.bid = new_bid.amount
             item.save()
             
             messages.success(request, "Bid placed successfully!")
-
             return redirect(reverse('listing_page', kwargs={'item_id': item_id}))
+            
+        print("error")
+        messages.error(request, "Invalid bid amount")
+    
+    return redirect(reverse('listing_page', kwargs={'item_id': item_id}))
 
 
 def login_view(request):
