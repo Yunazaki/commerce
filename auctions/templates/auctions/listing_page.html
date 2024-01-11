@@ -16,23 +16,23 @@
             <h1> {{ item.title }} </h1>
             <p class="description"> {{ item.description }} </p>
             <p><strong>Current Bid Price:</strong> ${{ item.bid }} </p>
-            <p class="date"> Created: {{ item.date_listed }} by {{ item.user}} </p>
+            <p class="date"> Created: {{ item.date_listed }} by <strong> {{ item.user}} </strong></p>
         </div>
         {% if user.is_authenticated %}
-            <div class="w-100">
-                <form action="{% url 'place_bid' item_id=item.id %}" style="display: inline;" method="POST">
+            <div class="w-100 flex-btn">
+                <form action="{% url 'place_bid' item_id=item.id %}" method="POST">
                     {% csrf_token %}
                     <button class="btn btn-primary">Bid</button>
                     <input type="number" name="bid_amount" required>
                 </form>
                 <button class="btn btn-primary">Add to Watchlist</button>
                 {% if user == item.user %}
-                    <button class="btn btn-primary">Close Auction</button>
+                    <button class="btn btn-primary">Close Bid</button>
                 {% endif %}
             </div>
         {% endif %}
         <h3>Bid List</h3>
-        <div class="bid-list">
+        <div class="bid-list rounded">
             <ul style="list-style-type: none; padding: 0;">
                 {% for bid in bids %}
                     <li> {{ bid.bidder }}: ${{ bid.amount }} </li>
