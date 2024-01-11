@@ -65,8 +65,6 @@ def place_bid(request, item_id):
             return redirect(reverse('listing_page', kwargs={'item_id': item_id}))
 
 
-
-
 def login_view(request):
     if request.method == "POST":
 

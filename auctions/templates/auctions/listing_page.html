@@ -13,7 +13,11 @@
         </div>
         {% if user.is_authenticated %}
             <div class="w-100">
-                <button class="btn btn-primary">Bid</button>
+                <form action="{% url 'place_bid' %}" style="display: inline;">
+                    {% csrf_token %}
+                    <button class="btn btn-primary">Bid</button>
+                    <input type="number" name="bid_amount">
+                </form>
                 <button class="btn btn-primary">Add to Watchlist</button>
                 {% if user == item.user %}
                     <button class="btn btn-primary">Close Auction</button>
