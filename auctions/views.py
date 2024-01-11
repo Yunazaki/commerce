@@ -1,11 +1,12 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from .models import User, Auctions
+from .models import User, Auctions, Bids
 from .forms import NewListingForm
 
 def index(request):
@@ -43,6 +44,27 @@ def listing_page(request, item_id):
     return render(request, "auctions/listing_page.html", {
         "item": item
     })
+
+
+@login_required
+def place_bid(request, item_id):
+    item = get_object_or_404(Auctions, pk=item_id)
+
+    if request.method == "POST":
+        amount = request.POST["bid_amount"]
+
+        if float(amount) > item.bid:
+
+            new_bid = Bids.objects.create(auction=item, bidder=request.user, amount=amount)
+            
+            item.bid = new_bid.amount
+            item.save()
+            
+            messages.success(request, "Bid placed successfully!")
+
+            return redirect(reverse('listing_page', kwargs={'item_id': item_id}))
+
+
 
 
 def login_view(request):
