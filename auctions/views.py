@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.db import IntegrityError
-from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
@@ -81,7 +81,7 @@ def close_bid(request, item_id):
         if request.user == item.user:
             item.is_active = False
             item.save()
-            
+
             messages.success(request, "Bid closed successfully")
             return redirect(reverse('listing_page', kwargs={'item_id': item_id}))    
 
