@@ -6,7 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect, HttpResponseNotFound
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
-from .models import User, Auctions, Bids
+from .models import User, Auctions, Bids, Comments
 from .forms import NewListingForm
 
 def index(request):
@@ -41,10 +41,12 @@ def create_listing(request):
 def listing_page(request, item_id):
     item = get_object_or_404(Auctions, pk=item_id)
     bids = Bids.objects.filter(auction=item_id)
+    comments = Comments.objects.filter(auction=item_id)
     
     return render(request, "auctions/listing_page.html", {
         "item": item,
-        "bids": bids
+        "bids": bids,
+        "comments": comments
     })
 
 
@@ -69,6 +71,18 @@ def place_bid(request, item_id):
         messages.error(request, "Invalid bid amount")
 
     return redirect(reverse('listing_page', kwargs={'item_id': item_id}))
+
+
+@login_required
+def make_comment(request, item_id):
+    item = get_object_or_404(Auctions, pk=item_id)
+
+    if request.method == "POST":
+        comment = request.POST["comment"]
+
+        Comments.objects.create(auction=item, user=request.user, comment=comment)
+        return redirect(reverse('listing_page', kwargs={'item_id': item_id}))
+
 
 
 def login_view(request):

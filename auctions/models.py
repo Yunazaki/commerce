@@ -28,4 +28,6 @@ class Bids(models.Model):
 
 
 class Comments(models.Model):
-    pass
+    auction = models.ForeignKey(Auctions, on_delete=models.CASCADE, related_name="comments", default=0)
+    comment = models.CharField(max_length=255, default="")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=False, null=False, default=0)
