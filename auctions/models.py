@@ -13,6 +13,7 @@ class Auctions(models.Model):
     image = models.ImageField(null=True, upload_to='media/')
     bid = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     date_listed = models.DateTimeField(default=timezone.now)
+    is_active = models.BooleanField(default=True)
 
     def __str__(self):
         return self.title
