@@ -41,10 +41,12 @@ def create_listing(request):
 def listing_page(request, item_id):
     item = get_object_or_404(Auctions, pk=item_id)
     bids = Bids.objects.filter(auction=item_id)
+    comments = Comments.objects.filter(auction=item_id)
     
     return render(request, "auctions/listing_page.html", {
         "item": item,
-        "bids": bids
+        "bids": bids,
+        "comments": comments
     })
 
 
