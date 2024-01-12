@@ -24,9 +24,6 @@ class Bids(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     timestamp = models.DateTimeField(default=timezone.now)
 
-    def __str__(self):
-        return f"Bid #{self.id} on {self.auction.title} by {self.bidder.username}"
-
 
 class Comments(models.Model):
     auction = models.ForeignKey(Auctions, on_delete=models.CASCADE, related_name="comments", default=0)

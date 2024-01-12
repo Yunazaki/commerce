@@ -42,11 +42,13 @@ def listing_page(request, item_id):
     item = get_object_or_404(Auctions, pk=item_id)
     bids = Bids.objects.filter(auction=item_id)
     comments = Comments.objects.filter(auction=item_id)
+    winner = bids.order_by('-timestamp').first()
     
     return render(request, "auctions/listing_page.html", {
         "item": item,
         "bids": bids,
-        "comments": comments
+        "comments": comments,
+        "winner": winner
     })
 
 
