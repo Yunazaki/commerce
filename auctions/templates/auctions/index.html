@@ -4,16 +4,18 @@
     <h2>Active Listings</h2>
     
     {% for item in auctions %}
-        <div class="mb-3 listing-container">
-            <div class="listing-container-img">
-                <img src="{{ item.image.url }}" alt="Image">
+        {% if item.is_active %}
+            <div class="mb-3 listing-container">
+                <div class="listing-container-img">
+                    <img src="{{ item.image.url }}" alt="Image">
+                </div>
+                <div class="listing-container-details">
+                    <h3> {{ item.title }} </h3>
+                    <p> <strong>Price:</strong> ${{ item.bid }} </p>
+                    <p class="description"> {{ item.description }} </p>
+                    <p class="date"> Created: {{ item.date_listed }} by {{ item.user }} </p>
+                </div>
             </div>
-            <div class="listing-container-details">
-                <h3> {{ item.title }} </h3>
-                <p> <strong>Price:</strong> ${{ item.bid }} </p>
-                <p class="description"> {{ item.description }} </p>
-                <p class="date"> Created: {{ item.date_listed }} by {{ item.user }} </p>
-            </div>
-        </div>
+        {% endif %}
     {% endfor %}
 {% endblock %}
