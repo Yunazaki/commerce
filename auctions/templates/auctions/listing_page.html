@@ -40,16 +40,25 @@
             </ul>
         </div>
         <h3>Comments</h3>
-        <div class="input-comment-container">
-            <form action="{% url 'make_comment' item_id=item.id %}" method="post" class="h-100">
-                {% csrf_token %}
-                <label for="comment">Make comment:</label>
-                <input type="text" name="comment" class="w-100 h-50">
-                <input type="submit" value="Submit" class="btn btn-primary mt-2">
-            </form>
-        </div>
-        <div class="comment-container">
-
-        </div>
+        {% if user.is_authenticated %}
+            <div class="input-comment-container">
+                <form action="{% url 'make_comment' item_id=item.id %}" method="post" class="form-comment-container">
+                    {% csrf_token %}
+                    <label for="comment">Make comment:</label>
+                    <input type="text" name="comment">
+                    <input type="submit" value="Submit" class="btn btn-primary mt-2">
+                </form>
+            </div>
+        {% endif %}
+        {% for comment in comments %}
+            <div class="comment-container">
+                <div>
+                    User: <strong>{{ comment.user }}</strong>
+                </div>
+                <div>
+                    {{ comment.comment }}
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
