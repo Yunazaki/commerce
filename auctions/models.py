@@ -4,6 +4,7 @@ from django.utils import timezone
 
 
 class User(AbstractUser):
+    watchlist = models.ManyToManyField('Auctions', related_name="watchlist")
     pass
 
 class Auctions(models.Model):

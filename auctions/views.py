@@ -16,6 +16,16 @@ def index(request):
         "auctions": auctions
     })
 
+@login_required
+def watchlist(request, username):
+    user = User.objects.get(username=username)
+    watchlist = user.watchlist.all()
+
+    return render(request, "auctions/watchlist.html", {
+        "user": user,
+        "watchlist": watchlist
+    })
+
 
 @login_required
 def create_listing(request):
@@ -91,6 +101,7 @@ def close_bid(request, item_id):
 
     return redirect(reverse('listing_page', kwargs={'item_id': item_id}))
 
+
 @login_required
 def make_comment(request, item_id):
     item = get_object_or_404(Auctions, pk=item_id)
@@ -101,6 +112,17 @@ def make_comment(request, item_id):
         Comments.objects.create(auction=item, user=request.user, comment=comment)
         return redirect(reverse('listing_page', kwargs={'item_id': item_id}))
 
+
+@login_required
+def add_watchlist(request, item_id):
+    user = request.user
+    item = get_object_or_404(Auctions, pk=item_id)
+
+    if item not in user.watchlist.all():
+        messages.success(request, "Successfully added to watchlist")
+        user.watchlist.add(item)
+
+    return redirect(reverse('listing_page', kwargs={'item_id': item_id}))
 
 
 def login_view(request):
