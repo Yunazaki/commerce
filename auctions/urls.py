@@ -11,8 +11,9 @@ urlpatterns = [
     path("register", views.register, name="register"),
     path("listing/create", views.create_listing, name="create_listing"),
     path("listing/<int:item_id>", views.listing_page, name="listing_page"),
-    path("listing/<int:item_id/bid", views.place_bid, name="place_bid")
-    path("listing/<int:item_id>/bid", views.place_bid, name="place_bid")
     path("listing/<int:item_id>/bid", views.place_bid, name="place_bid"),
     path("listing/<int:item_id>/comment", views.make_comment, name="make_comment")
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
