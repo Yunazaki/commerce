@@ -2,7 +2,7 @@ from django.contrib import admin
 from .models import User, Auctions, Bids, Comments
 
 class AuctionsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'bid')
+    list_display = ('title', 'id', 'bid')
 
 class UserAdmin(admin.ModelAdmin):
     list_display = ('username', 'id')
