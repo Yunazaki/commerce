@@ -74,6 +74,22 @@ def place_bid(request, item_id):
 
 
 @login_required
+def close_bid(request, item_id):
+    item = get_object_or_404(Auctions, pk=item_id)
+
+    if request.method == "POST":
+        if request.user == item.user:
+            item.is_active = False
+            item.save()
+            
+            messages.success(request, "Bid closed successfully")
+            return redirect(reverse('listing_page', kwargs={'item_id': item_id}))    
+
+        messages.error(request, "An error occurred")
+
+    return redirect(reverse('listing_page', kwargs={'item_id': item_id}))
+
+@login_required
 def make_comment(request, item_id):
     item = get_object_or_404(Auctions, pk=item_id)
 

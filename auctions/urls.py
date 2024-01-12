@@ -12,7 +12,8 @@ urlpatterns = [
     path("listing/create", views.create_listing, name="create_listing"),
     path("listing/<int:item_id>", views.listing_page, name="listing_page"),
     path("listing/<int:item_id>/bid", views.place_bid, name="place_bid"),
-    path("listing/<int:item_id>/comment", views.make_comment, name="make_comment")
+    path("listing/<int:item_id>/comment", views.make_comment, name="make_comment"),
+    path("listing/<int:item_id>/close", views.close_bid, name="close_bid")
 ]
 
 if settings.DEBUG:

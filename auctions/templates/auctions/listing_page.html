@@ -18,7 +18,7 @@
             <p><strong>Current Bid Price:</strong> ${{ item.bid }} </p>
             <p class="date"> Created: {{ item.date_listed }} by <strong> {{ item.user}} </strong></p>
         </div>
-        {% if user.is_authenticated %}
+        {% if user.is_authenticated and item.is_active %}
             <div class="w-100 flex-btn">
                 <form action="{% url 'place_bid' item_id=item.id %}" method="POST">
                     {% csrf_token %}
@@ -27,7 +27,10 @@
                 </form>
                 <button class="btn btn-primary">Add to Watchlist</button>
                 {% if user == item.user %}
-                    <button class="btn btn-primary">Close Bid</button>
+                    <form action="{% url 'close_bid' item_id=item.id %}" method="post">
+                        {% csrf_token %}
+                        <button class="btn btn-primary">Close Bid</button>
+                    </form>
                 {% endif %}
             </div>
         {% endif %}
