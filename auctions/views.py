@@ -10,7 +10,7 @@ from .models import User, Auctions, Bids, Comments
 from .forms import NewListingForm
 
 def index(request):
-    auctions = Auctions.objects.all()
+    auctions = Auctions.objects.filter(is_active=True)
     
     return render(request, "auctions/index.html", {
         "auctions": auctions
