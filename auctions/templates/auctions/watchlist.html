@@ -10,7 +10,7 @@
                 <img src="{{ item.image.url }}" alt="Image">
             </div>
             <div class="listing-container-details">
-                <h3> {{ item.title }} </h3>
+                <a href="{% url 'listing_page' item_id=item.id %}" style="text-decoration: none; color: black;"><h3> {{ item.title }} </h3></a>
                 <p> <strong>Price:</strong> ${{ item.bid }} </p>
                 <p class="description"> {{ item.description }} </p>
                 <p class="date"> Created: {{ item.date_listed }} by {{ item.user }} </p>
