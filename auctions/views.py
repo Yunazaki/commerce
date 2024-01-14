@@ -10,10 +10,20 @@ from .models import User, Auctions, Bids, Comments
 from .forms import NewListingForm
 
 def index(request):
+    input = request.GET.get('q', '')
+
     auctions = Auctions.objects.filter(is_active=True)
+
+    if input:
+        auctions = Auctions.objects.filter(category=input, is_active=True)
     
+    categories = Auctions.objects.values_list('category', flat=True).distinct()
+
     return render(request, "auctions/index.html", {
-        "auctions": auctions
+        "auctions_model": Auctions,
+        "auctions": auctions,
+        "categories": categories,
+        "input": input
     })
 
 @login_required
@@ -44,7 +54,8 @@ def create_listing(request):
             })
 
     return render(request, "auctions/create_listing.html", {
-        "form": NewListingForm()
+        "form": NewListingForm(),
+        "auctions_model": Auctions
     })
 
 

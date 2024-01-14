@@ -8,6 +8,17 @@ class User(AbstractUser):
     pass
 
 class Auctions(models.Model):
+    CATEGORIES = {
+        "N/A": "None",
+        "CL": "Clothing",
+        "BO": "Books",
+        "MMG": "Movies, Music & Games",
+        "EL": "Electronics",
+        "HO": "Home",
+        "BE": "Beauty & Health",
+        "SP": "Sports & Outdoors",
+        "AU": "Automotive & Industrial",
+    }
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=64)
     description = models.CharField(max_length=255, blank=True)
@@ -15,6 +26,7 @@ class Auctions(models.Model):
     bid = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     date_listed = models.DateTimeField(default=timezone.now)
     is_active = models.BooleanField(default=True)
+    category = models.CharField(choices=CATEGORIES.items(), max_length=3, default="N/A")
 
     def __str__(self):
         return self.title
