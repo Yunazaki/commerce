@@ -29,6 +29,14 @@
             <label for="{{ form.id_for_label }}">Starting Bid $</label>
             <input type="number" name="{{ form.bid.name }}" id="{{ form.bid.id_for_label }}">
         </div>
+        <div class="mb-3">
+            <label for="{{ form.category.id_for_label}}">Select category</label>
+            <select name="{{ form.category.name }}" id="{{ form.category.id_for_label }}">
+                {% for k, v in auctions_model.CATEGORIES.items %}
+                    <option value="{{ k }}"> {{ v }}</option>
+                {% endfor %}
+            </select>
+        </div>
         <button class="btn btn-primary" type="submit">Submit</button>
     </form>
 {% endblock %}

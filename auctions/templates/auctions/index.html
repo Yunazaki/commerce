@@ -1,7 +1,18 @@
 {% extends "auctions/layout.html" %}
 
 {% block body %}
-    <h2>Active Listings</h2>
+    <div>
+        <h2>Active Listings</h2>
+        <form action="" method="get">
+            <select name="q" id="category">
+                <option value="" {% if input %} selected {% endif %}>All categories</option>
+                {% for k, v in auctions_model.CATEGORIES.items %}
+                    <option value="{{ k }}" {% if input == k %} selected {% endif %}> {{ v }} </option>
+                {% endfor %}
+            </select>
+            <button type="submit">Filter</button>
+        </form>
+    </div>
     
     {% for item in auctions %}
         <div class="mb-3 listing-container">
